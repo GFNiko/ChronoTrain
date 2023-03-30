@@ -80,7 +80,7 @@ PKN company trains employees frequently, so there is a need for a time tracking 
 JIKU IT-Solutions GmbH in Stuttgart is an IT systems house
 
 ### Author
-**HUDDEIJ Softworks** 
+**HUDDEIJ Softworks** © 2023
 
 ### Contact
-[**chronotrain@huddeij.de**](mailto:chronotrain@huddeij.de)
+[**chronotrain@huddeij.de**](mailto:chronotrain@huddeij.de) 
