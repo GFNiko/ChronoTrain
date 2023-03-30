@@ -4,3 +4,4 @@
 /.idea/
 /source/db/training.db
 /db.log
+/app.log

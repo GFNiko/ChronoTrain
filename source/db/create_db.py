@@ -1,12 +1,7 @@
 import sqlite3
 from dataclasses import dataclass
 from .db_connect import DbConnection
-import logging
-
-
-logging.basicConfig(filename="../db.log", level=logging.DEBUG)
-logger = logging.getLogger()
-
+from source.logging_logic import log_func
 
 @dataclass
 class CreateTables(DbConnection):
@@ -20,8 +15,10 @@ class CreateTables(DbConnection):
                                     registrydate DATETIME)""")
             self.con.commit()
 
+            log_func().debug("Table 'user' created or already existent")
+
         except sqlite3.OperationalError as E:
-            logger.error(f"Error {E}")
+            log_func().error(f"Error {E}")
 
     def create_report_table(self):
         try:
@@ -33,6 +30,7 @@ class CreateTables(DbConnection):
                                 ttstop TIME NOT NULL,
                                 FOREIGN KEY (userid) REFERENCES user(userid))""")
             self.con.commit()
+            log_func().debug("Table 'training' created or already existent")
 
         except sqlite3.OperationalError as E:
-            logger.error(E)
+            log_func().error(E)

@@ -1,12 +1,8 @@
 import sqlite3
-
-from .db_connect import DbConnection
 from dataclasses import dataclass
-import logging
 
-
-logging.basicConfig(filename="../db.log", level=logging.DEBUG)
-logger = logging.getLogger()
+from source.logging_logic import log_func
+from .db_connect import DbConnection
 
 
 @dataclass
@@ -15,12 +11,11 @@ class GetReport(DbConnection):
     def getreport(self, userid: int) -> list:
         try:
             output = self.cur.execute("""
-            SELECT * FROM training WHERE userid = """ + str(userid)).fetchone()
+            SELECT * FROM training WHERE userid = """ + str(userid)).fetchall()
             self.con.commit()
-            logger.info("Report successful returned from db")
+            log_func().debug("Report read from db")
 
             return output
 
         except sqlite3.OperationalError as E:
-            logger.error(E)
-
+            log_func().error(E)

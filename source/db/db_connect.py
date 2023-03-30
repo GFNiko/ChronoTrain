@@ -1,10 +1,16 @@
 import sqlite3
 from dataclasses import dataclass
 
+from source.logging_logic import log_func
+
+
 @dataclass
 class DbConnection:
-    con: sqlite3 = sqlite3.connect("db/training.db")
-    cur: con = con.cursor()
+    try:
+        con: sqlite3 = sqlite3.connect("db/training.db")
+        cur: con = con.cursor()
+    except sqlite3.OperationalError as E:
+        log_func().error(E)
 
     def close(self):
         if self.cur:

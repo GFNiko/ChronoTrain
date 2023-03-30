@@ -1,11 +1,8 @@
 import sqlite3
 from dataclasses import dataclass
 from .db_connect import DbConnection
-import logging
+from source.loging_logic import log_func
 
-
-logging.basicConfig(filename="../db.log", level=logging.DEBUG)
-logger = logging.getLogger()
 
 @dataclass
 class ReadOut(DbConnection):
@@ -14,8 +11,8 @@ class ReadOut(DbConnection):
         try:
             readout = self.cur.execute('''SELECT * FROM user''').fetchall()
             self.con.commit()
-            logger.info("Query successful executed")
+            log_func().debug("User in db found")
             return readout
 
         except sqlite3.OperationalError as E:
-            logger.error(E)
+            log_func().error(E)

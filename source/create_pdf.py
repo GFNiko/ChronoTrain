@@ -25,12 +25,22 @@ class PDF(FPDF):
 
     def body(self, identnr):
         raw_data = _get_report(identnr)
+        print(raw_data)
+        stringed_data = []
+
+        for i in raw_data:
+            if isinstance(i, int):
+                stringed_data.append(str(i))
+                continue
+            stringed_data.append(i)
+        print(stringed_data)
+
         key_list = ["Report", "Datum", "Ident Nr.", "Startzeit", "Endzeit"]
 
-        data_dict = {key_list[i]: [entry[i] for entry in raw_data]
+        data_dict = {key_list[i]: [entry[i] for entry in stringed_data]
                      for i in range(len(key_list))}
 
-        # print(data_dict)
+        print(data_dict)
 
         # Define column widths
         col_widths = [self.w * 5 / 10] + [self.w / 10] * 4
@@ -53,8 +63,17 @@ class PDF(FPDF):
         print("Erfolgreich gespeichert")
 
     def footer(self):
-        img = '../media/logo.png'
+        # img = '../media/logo.png'
         self.set_y(-15)
-        self.image(img, x=20, y=40)
+        # self.image(img, x=20, y=40)
         self.set_font('helvetica', 'I', 8)
         self.cell(0, 10, 'Huddeij Softworks @2023', align='C')
+
+
+"""
+    INFO: "PDF report generated successfully."
+    ERROR: "Failed to generate PDF report due to a database error."
+    DEBUG: "Raw data retrieved from the database: {raw_data}."
+    WARNING: "Empty data retrieved from the database for report with identnr {identnr}."
+    CRITICAL: "PDF generation failed due to an unexpected error."
+"""

@@ -2,6 +2,7 @@ import datetime as dt
 import sqlite3
 from dataclasses import dataclass
 
+from source.logging_logic import log_func
 from .db_connect import DbConnection
 
 
@@ -21,5 +22,7 @@ class SaveReport(DbConnection):
             :report, :today, :userid, :start, :stop)""", input_dict)
             self.con.commit()
 
-        except sqlite3.OperationalError:
-            print("Oh No! A wild Error appeared")
+            log_func().debug("Report saved to db")
+
+        except sqlite3.OperationalError as E:
+            log_func().error(E)

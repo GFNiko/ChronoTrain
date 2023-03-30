@@ -1,12 +1,9 @@
 import datetime as dt
-import logging
 import sqlite3
 from dataclasses import dataclass
 
+from source.logging_logic import log_func
 from .db_connect import DbConnection
-
-logging.basicConfig(filename="../db.log", level=logging.DEBUG)
-logger = logging.getLogger()
 
 
 @dataclass
@@ -24,7 +21,7 @@ class AddUser(DbConnection):
                              input_dict)
             self.con.commit()
 
-            logger.info(f"User {username} successful created")
+            log_func().debug(f"User {username} created")
 
         except sqlite3.OperationalError as E:
-            logger.error(E)
+            log_func().error(E)

@@ -1,19 +1,20 @@
-import os.path
-
 from GUI.login_gui import Login
 from db.create_db import CreateTables
-from source.db.db_connect import DbConnection
+from source.logging_logic import log_func
+
+""" Set the level of logging 0: NOTSET, 10: DEBUG,
+20: INFO, 30: WARNING, 40: ERROR, 50: CRITICAL """
+LOGGING_LEVEL = 10
+
+log_func(LOGGING_LEVEL)
 
 
 def create_tables():
     """ Checks for database existence and
         creates dependent tables, if not found. """
-    # if not os.path.isfile('db/training.db'):
     create_tb = CreateTables()
     create_tb.create_user_table()
     create_tb.create_report_table()
-    # else:
-    #     print("tables already exist")
 
 
 def main():
@@ -27,4 +28,5 @@ def main():
 
 
 if __name__ == '__main__':
+    log_func().info("Program run")
     main()
