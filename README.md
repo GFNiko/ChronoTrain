@@ -25,6 +25,8 @@ The user interface is intuitive and restrictive, preventing users from making in
 **Login & Add Users**<br>
 The program generates a login screen that allows trainees to log in, provided they have an account.
 An account can only be created using an identification number (ID) provided by the training company.
+This code uses strong hashing, salting, Base64 encoding,
+and the bcrypt algorithm to securely store and check user passwords.
 
 **Daily Reports & time recording**<br>
 Once logged in, the trainee can submit daily reports, but only after a minimum of 50 characters have been entered.
@@ -69,8 +71,6 @@ and the start and end times of the corresponding day.
 but do not calculate the difference.
 - No date frame implemented by now. Therefore, you cannot choose a specific time frame for the PDF output.
 Users get always all their corresponding reports.
-- Password saved in clear text, as the software is not ready for shipment yet, no need for any security right now.
-Planned for the next development iteration .
 
 ## Background
 ### Customer:

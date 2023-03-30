@@ -1,18 +1,18 @@
 import sqlite3
-from dataclasses import dataclass
 import tkinter as tk
+from dataclasses import dataclass
 
 import ttkbootstrap as tb
 from ttkbootstrap.constants import *
 
+from source.data_parser import get_user, addUser
+from source.secure_password import check_password, gen_password_hash
 from .chronotrain import ChronoTrainGUI
-from source.data_parser import get_user, addUser, get_user_ident
 from .main_area import Notebook
 
 
 @dataclass
 class AddUser(ChronoTrainGUI):
-
     registry_frame = tb.Frame(ChronoTrainGUI.root)
     registry_frame.pack(pady=20)
 
@@ -55,7 +55,7 @@ class AddUser(ChronoTrainGUI):
 
             else:
                 try:
-                    addUser([identnr_entry.get(), usern_entry.get(), passw_entry.get()])
+                    addUser([identnr_entry.get(), usern_entry.get(), gen_password_hash(passw_entry.get())])
                     self.registry_frame.destroy()
                     success()
                     self.ls = Login()
@@ -145,16 +145,20 @@ class Login(ChronoTrainGUI):
         self.login_frame.destroy()
 
     def credentials_check(self) -> None:
+        try:
+            user = get_user(self.username_entry.get())
+            self.ident_nr = user[0]
+            passwd = user[1]
+            if check_password(passwd, gen_password_hash(passwd)):
+                self.login_frame.destroy()
+                ma = Notebook()
+                ma.input_area(self.ident_nr)
+                ma.output_area(self.ident_nr)
+                self.failed.config(text="")
+            else:
+                self.failed.place(relx=0.5, rely=0.5, y=120, anchor=CENTER)
 
-        if get_user(self.username_entry.get(), self.pass_entry.get()):
-            self.ident_nr = get_user_ident(self.username_entry.get())
-            self.login_frame.destroy()
-            ma = Notebook()
-            ma.input_area(self.ident_nr)
-            ma.output_area(self.ident_nr)
-            self.failed.config(text="")
-
-        else:
+        except TypeError:
             self.failed.place(relx=0.5, rely=0.5, y=120, anchor=CENTER)
 
     def login_area(self):

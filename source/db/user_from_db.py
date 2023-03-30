@@ -9,9 +9,9 @@ class GetUser(DbConnection):
 
     def select_user(self, un: str):
         try:
-            user = self.cur.execute("""SELECT *
+            user = self.cur.execute("""SELECT userid, passwd
                              FROM user WHERE username=?""",
-                                    [un]).fetchmany(3)
+                                    [un]).fetchone()
             self.con.commit()
             return user
 
