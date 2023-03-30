@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "ChronoTrain"
+version = "0.1.0"
+description = ""
+authors = ["GFNiko <nikolai.klamm@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fpdf2 = "^2.7.1"
+ttkbootstrap = "^1.10.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+ignore = ["F403","F405"]
