@@ -1,6 +1,11 @@
 import sqlite3
 from dataclasses import dataclass
 from .db_connect import DbConnection
+import logging
+
+
+logging.basicConfig(filename="../db.log", level=logging.DEBUG)
+logger = logging.getLogger()
 
 @dataclass
 class ReadOut(DbConnection):
@@ -9,11 +14,8 @@ class ReadOut(DbConnection):
         try:
             readout = self.cur.execute('''SELECT * FROM user''').fetchall()
             self.con.commit()
-            print("Query successful executed")
+            logger.info("Query successful executed")
             return readout
 
-        except sqlite3.OperationalError:
-            print("Error, try again please")
-        #
-        # finally:
-        #     self.con.close()
+        except sqlite3.OperationalError as E:
+            logger.error(E)

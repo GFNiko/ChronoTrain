@@ -55,6 +55,6 @@ class PDF(FPDF):
     def footer(self):
         img = '../media/logo.png'
         self.set_y(-15)
+        self.image(img, x=20, y=40)
         self.set_font('helvetica', 'I', 8)
         self.cell(0, 10, 'Huddeij Softworks @2023', align='C')
-        self.image(img, x=10, y=275, w=20)

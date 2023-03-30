@@ -45,8 +45,7 @@ class Notebook(ChronoTrainGUI):
             self.root.destroy()
 
         def end_frame():
-            input_frame.destroy()
-            ending_frame = Frame(self.root)
+            ending_frame = Frame(self.root, bg='black')
             ending_frame.place(relx=0.5, rely=0.5, anchor=CENTER)
             closing_lbl = tb.Label(ending_frame,
                                    justify='center',
