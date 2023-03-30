@@ -83,4 +83,4 @@ JIKU IT-Solutions GmbH in Stuttgart is an IT systems house
 **HUDDEIJ Softworks** 
 
 ### Contact
-[**chronotrain@huddeij.de**](mailto:chronotrain@huddeij.de)
+[**chronotrain@huddeij.de**](mailto:chronotrain@huddeij.de) © 2023
