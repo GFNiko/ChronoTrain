@@ -6,16 +6,16 @@
 [Task](task.md) (German)
 
 ---
-This project was developed in [**Pycharm**](https://www.jetbrains.com/pycharm), which is inspired by Bootstrap, 
-with the libraries:
+This project was developed in [**Pycharm**](https://www.jetbrains.com/pycharm) with the following external libraries:
 - [**ttkbootstrap**](https://ttkbootstrap.readthedocs.io/en/latest)
 - [**tkinter**](https://docs.python.org/3/library/tkinter.html)
 - [**fpdf**](https://pyfpdf.github.io/fpdf2)
 
 ***ChronoTrain*** runs locally on the student's computers and uses a centralized SQLite3 database named `training.db`,
 which shall be provided on a network drive within the house of the customer *PKN*.
-The project was created in a `poetry` environment, and the
-linter I used is called [**Ruff**](https://beta.ruff.rs/docs).
+The project was created in a `poetry` environment, and the linter I used is called [**Ruff**](https://beta.ruff.rs/docs).
+Comprehensive logging functionality in multiple levels via the library `logging`.
+This code uses strong hashing, salting, Base64 encoding, and the bcrypt algorithm to securely store and check user passwords.
 
 ### Learnings
 The project provided a great opportunity to learn about Graphical User Interfaces, PDF generation, and SQLite.
@@ -40,6 +40,9 @@ including the daily report, the date the report was saved, the trainee's ID, and
 corresponding day. Now, the PDF is saved in the project's root folder, but a prompt for a save location
 will be added.
 
+
+
+
 ## Way of realization
 The project was developed iteratively, beginning with the GUI design of the login screen, followed by the creation of the SQLite database, and concluding with the development of the report storage feature. Finally, fpdf was used to create a clear and concise output that presents the reports in a tabular format, with information about the trainee and the associated times.
 
@@ -63,14 +66,11 @@ The project was developed iteratively, beginning with the GUI design of the logi
 - Once logged in, start the daily time recording using the appropriate button.
 - Enter a report of at least 50 characters.
 - Stop the daily time recording using the appropriate button.
-- Select a period to generate a PDF containing the daily report, the date the report was saved, the trainee's ID, 
-and the start and end times of the corresponding day.
+- Select a period to generate a PDF containing the daily report, the date the report was saved, the trainee's ID, and the start and end times of the corresponding day.
 
 ## Known Bugs
-- There is no time calculation implemented yet. The butttons check the beginning and end of users time,
-but do not calculate the difference.
-- No date frame implemented by now. Therefore, you cannot choose a specific time frame for the PDF output.
-Users get always all their corresponding reports.
+- There is no time calculation implemented yet. The butttons check the beginning and end of users time, but do not calculate the difference.
+- No date frame implemented by now. Therefore, you cannot choose a specific time frame for the PDF output. Users get all their corresponding reports.
 
 ## Background
 ### Customer:
